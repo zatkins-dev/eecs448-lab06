@@ -23,14 +23,14 @@ class Test
     void runTests();
     
     private:
-    bool testIsEmpty(bool expected) const;
-    bool testSize(bool expected) const;
-    bool testSearch(int value, bool expected) const;
+    bool testIsEmpty() const;
+    bool testSize() const;
+    bool testSearch(int value) const;
     bool testToVector(vector<int> expected) const;
     bool testAddBack(int value);
     bool testAddFront(int value);
-    bool testRemoveBack(bool expected);	
-    bool testRemoveFront(bool expected);
+    bool testRemoveBack();	
+    bool testRemoveFront();
     LinkedListOfInts* list;
 
 };

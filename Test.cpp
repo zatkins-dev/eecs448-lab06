@@ -13,39 +13,68 @@ void Test::runTests()
     
 }
 
-bool Test::testIsEmpty(bool expected) const
+bool Test::testIsEmpty() const
 {
-    return list->isEmpty() == expected;
+    vector<int> testAgainst = list->toVector();
+    return list->isEmpty() == testAgainst.empty();
 }
-bool Test::testSize(bool expected) const
+bool Test::testSize() const
 {
-    return list->size() == expected;
+    vector<int> testAgainst = list->toVector();
+    return list->size() == int (testAgainst.size());
 }
-bool Test::testSearch(int value, bool expected) const
+bool Test::testSearch(int value) const
 {
-    return list->search(value) == expected;
+    vector<int> testAgainst = list->toVector();
+    bool found = false;
+    for (auto val: testAgainst) {
+        if (val == value) {
+            found = true;
+        }
+    }
+    return list->search(value) == found;
 }
-bool Test::testToVector(vector<int> expected) const
+bool Test::testAddBack(int value)
 {
-    vector<int> result = list->toVector();
-    if (result == expected) {
+    vector<int> testAgainst = list->toVector();
+    list->addBack(value);
+    testAgainst.push_back(value);
+    if (list->toVector() == testAgainst) {
         return true;
     }
     return false;
 }
-bool Test::testAddBack(int value)
-{
-
-}
 bool Test::testAddFront(int value)
 {
-
+    vector<int> testAgainst = list->toVector();
+    list->addFront(value);
+    testAgainst.insert(testAgainst.begin(), value);
+    if (list->toVector() == testAgainst) {
+        return true;
+    }
+    return false;
 }
-bool Test::testRemoveBack(bool expected);
+bool Test::testRemoveBack()
 {
-
+    vector<int> testAgainst = list->toVector();    
+    if (testAgainst.size() == 0) {
+        return list->removeBack() == false;
+    }
+    testAgainst.pop_back();
+    if (list->removeBack()) {
+        return list->toVector() == testAgainst;
+    }
+    return false;
 }
-bool Test::testRemoveFront(bool expected)
+bool Test::testRemoveFront()
 {
-
+    vector<int> testAgainst = list->toVector();    
+    if (testAgainst.size() == 0) {
+        return list->removeFront() == false;
+    }
+    testAgainst.erase(testAgainst.begin());
+    if (list->removeBack()) {
+        return list->toVector() == testAgainst;
+    }
+    return false;
 }
