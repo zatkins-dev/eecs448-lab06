@@ -10,14 +10,28 @@
 
 #include <iostream>
 #include <assert.h>
-#include "eecs448-lab06-base/LinkedListOfInts.h"
-#include "eecs448-lab06-base/Node.h"
+#include "LinkedListOfInts.h"
+#include "Node.h"
+#include <vector>
 
+using namespace std;
 class Test
-{
+{   
     public:
-        template <typename Y, typename X>
-        bool test(Y (*func)(X), X inputs);
+    Test(LinkedListOfInts testList);
+    ~Test();
+    void runTests();
+    
+    private:
+    bool testIsEmpty(bool expected) const;
+    bool testSize(bool expected) const;
+    bool testSearch(int value, bool expected) const;
+    bool testToVector(vector<int> expected) const;
+    bool testAddBack(int value);
+    bool testAddFront(int value);
+    bool testRemoveBack(bool expected);	
+    bool testRemoveFront(bool expected);
+    LinkedListOfInts* list;
 
 };
 #endif // TEST_H
