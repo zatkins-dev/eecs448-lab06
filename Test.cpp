@@ -7,10 +7,11 @@ Test::Test(LinkedListOfInts testList)
 
 void Test::runTests()
 {
-    cout << "Starting Test Suite...\n";
-
-    // List should be empty
-    
+    cout << "Starting Test Suite...\n----------------------\n";
+    cout << "Testing LinkedListOfInts::isEmpty...\t\tResult: ";
+    string test = testIsEmpty() ? "Passed!" : "Failed.";
+    cout << test << endl;
+    cout << "Testing LinkedListOfInts::addFront...\t\tResult: ";
 }
 
 bool Test::testIsEmpty() const
