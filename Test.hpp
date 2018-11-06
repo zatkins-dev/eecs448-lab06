@@ -13,6 +13,7 @@
 #include "LinkedListOfInts.h"
 #include "Node.h"
 #include <vector>
+#include <tuple>
 
 using namespace std;
 class Test
@@ -24,7 +25,7 @@ class Test
     
     private:
     bool testIsEmpty() const;
-    bool testSize() const;
+    tuple<bool, int> testSize() const;
     bool testSearch(int value) const;
     bool testToVector(vector<int> expected) const;
     bool testAddBack(int value);

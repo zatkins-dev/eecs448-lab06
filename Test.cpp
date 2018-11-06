@@ -8,10 +8,22 @@ Test::Test(LinkedListOfInts testList)
 void Test::runTests()
 {
     cout << "Starting Test Suite...\n----------------------\n";
-    cout << "Testing LinkedListOfInts::isEmpty...\t\tResult: ";
-    string test = testIsEmpty() ? "Passed!" : "Failed.";
+    cout << "Testing LinkedListOfInts::isEmpty...\t\tExpected: True Result: ";
+    string test = testIsEmpty() ? "True -- Passed!" : "False -- Failed.";
+    cout << test << endl;
+    cout << "Testing LinkedListOfInts::addBack...\t\tResult: ";
+    test = testAddBack(1) && testAddBack(2) ? "Passed!" : "Failed.";
+    cout << test << endl;
+    cout << "Testing LinkedListOfInts::isEmpty...\t\tExpected: False Result: ";
+    test = testIsEmpty() ? "False -- Passed!" : "True -- Failed.";
     cout << test << endl;
     cout << "Testing LinkedListOfInts::addFront...\t\tResult: ";
+    test = testAddFront(3) ? "Passed!" : "Failed.";
+    cout << test << endl;
+    cout << "Testing LinkedListOfInts::isSize...\t\tExpected: 3 Result: ";
+    tuple<bool, int> result = testSize();
+    test = get<0>(result) ? "False -- Passed!" : "True -- Failed.";
+    cout << test << endl;
 }
 
 bool Test::testIsEmpty() const
@@ -19,10 +31,10 @@ bool Test::testIsEmpty() const
     vector<int> testAgainst = list->toVector();
     return list->isEmpty() == testAgainst.empty();
 }
-bool Test::testSize() const
+tuple<bool, int> Test::testSize() const
 {
     vector<int> testAgainst = list->toVector();
-    return list->size() == int (testAgainst.size());
+    return make_tuple(list->size() == int (testAgainst.size()), list->size());
 }
 bool Test::testSearch(int value) const
 {
