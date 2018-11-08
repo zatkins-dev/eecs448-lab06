@@ -13,8 +13,8 @@
 #include "LinkedListOfInts.h"
 #include "Node.h"
 #include <vector>
-#include <tuple>
 #include <string>
+#include <sstream>
 
 using namespace std;
 class Test
@@ -25,15 +25,17 @@ class Test
     void runTests();
 
     private:
-    bool testIsEmpty() const;
-    tuple<bool, int> testSize() const;
-    bool testSearch(int value) const;
-    bool testToVector(vector<int> expected) const;
-    bool testAddBack(int value);
-    bool testAddFront(int value);
-    bool testRemoveBack();
-    bool testRemoveFront();
+    string testIsEmpty();
+    string testSize();
+    string testSearch(int value);
+    string testAddBack(int value);
+    string testAddFront(int value);
+    string testRemoveBack();
+    string testRemoveFront();
+    string displayList();
+    string displayVector(vector<int> vect);
     LinkedListOfInts* list;
+    vector<string> failedTests;
 
 };
 #endif // TEST_H
