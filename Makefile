@@ -4,7 +4,7 @@
 
 #Add needed Test.o
 prog: clean main.o Test.o
-	g++ -g -Wall -std=c++11 main.o Test.o LinkedListOfInts.o -o prog
+	g++ -g -Wall -std=c++11 main.o Test.o LinkedListOfInts.o -o prog; clear
 
 
 main.o: main.cpp
@@ -17,4 +17,4 @@ Test.o: Test.cpp
 
 #DON'T delete LinkedList.o!
 clean:
-	rm -f test.o main.o *.*~ prog
+	rm -f Test.o main.o *.*~ prog
