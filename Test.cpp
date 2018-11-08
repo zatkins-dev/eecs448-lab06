@@ -1,41 +1,28 @@
 #include "Test.hpp"
 
-Test::Test(LinkedListOfInts testList)
+Test::Test()
 {
-    list = &testList;
+    list = new LinkedListOfInts();
 }
 
-void Test::runTests()
+Test::~Test()
 {
-    cout << "Starting Test Suite...\n----------------------\n";
-    cout << "Testing LinkedListOfInts::isEmpty...\t\tExpected: True Result: ";
-    string test = testIsEmpty() ? "True -- Passed!" : "False -- Failed.";
-    cout << test << endl;
-    cout << "Testing LinkedListOfInts::addBack...\t\tResult: ";
-    test = testAddBack(1) && testAddBack(2) ? "Passed!" : "Failed.";
-    cout << test << endl;
-    cout << "Testing LinkedListOfInts::isEmpty...\t\tExpected: False Result: ";
-    test = testIsEmpty() ? "False -- Passed!" : "True -- Failed.";
-    cout << test << endl;
-    cout << "Testing LinkedListOfInts::addFront...\t\tResult: ";
-    test = testAddFront(3) ? "Passed!" : "Failed.";
-    cout << test << endl;
-    cout << "Testing LinkedListOfInts::isSize...\t\tExpected: 3 Result: ";
-    tuple<bool, int> result = testSize();
-    test = get<0>(result) ? "False -- Passed!" : "True -- Failed.";
-    cout << test << endl;
+    delete list;
 }
 
 bool Test::testIsEmpty() const
 {
     vector<int> testAgainst = list->toVector();
+
     return list->isEmpty() == testAgainst.empty();
 }
+
 tuple<bool, int> Test::testSize() const
 {
     vector<int> testAgainst = list->toVector();
     return make_tuple(list->size() == int (testAgainst.size()), list->size());
 }
+
 bool Test::testSearch(int value) const
 {
     vector<int> testAgainst = list->toVector();
@@ -47,6 +34,7 @@ bool Test::testSearch(int value) const
     }
     return list->search(value) == found;
 }
+
 bool Test::testAddBack(int value)
 {
     vector<int> testAgainst = list->toVector();
@@ -57,6 +45,7 @@ bool Test::testAddBack(int value)
     }
     return false;
 }
+
 bool Test::testAddFront(int value)
 {
     vector<int> testAgainst = list->toVector();
@@ -67,9 +56,10 @@ bool Test::testAddFront(int value)
     }
     return false;
 }
+
 bool Test::testRemoveBack()
 {
-    vector<int> testAgainst = list->toVector();    
+    vector<int> testAgainst = list->toVector();
     if (testAgainst.size() == 0) {
         return list->removeBack() == false;
     }
@@ -79,9 +69,10 @@ bool Test::testRemoveBack()
     }
     return false;
 }
+
 bool Test::testRemoveFront()
 {
-    vector<int> testAgainst = list->toVector();    
+    vector<int> testAgainst = list->toVector();
     if (testAgainst.size() == 0) {
         return list->removeFront() == false;
     }
@@ -90,4 +81,75 @@ bool Test::testRemoveFront()
         return list->toVector() == testAgainst;
     }
     return false;
+}
+
+void Test::runTests()
+{
+    vector<string> failedTests;
+    string test;
+    cout << "Starting Test Suite...\n----------------------\n";
+    cout << "Testing LinkedListOfInts::isEmpty....\n\tExpected: True \n\tActual: ";
+    if (testIsEmpty()) {
+        test = "True\n\tResult: Passed!";
+    } else {
+        test = "False\n\tResult: Failed.";
+        failedTests.push_back("LinkedListOfInts::isEmpty when list is empty.");
+    }
+    cout << test << endl;
+    cout << "Testing LinkedListOfInts::addFront twice....\n\tResult: ";
+    if (testIsEmpty()) {
+        test = "True\n\tResult: Passed!";
+    } else {
+        test = "False\n\tResult: Failed.";
+        failedTests.push_back("LinkedListOfInts::isEmpty when list is empty.");
+    }
+    test = testAddFront(1)&&testAddFront(2) ? "Passed!" : "Failed.";
+    if (testIsEmpty()) {
+        test = "True\n\tResult: Passed!";
+    } else {
+        test = "False\n\tResult: Failed.";
+        failedTests.push_back("LinkedListOfInts::isEmpty when list is empty.");
+    }
+    cout << test << endl;
+    cout << "Testing LinkedListOfInts::isSize......\n\tExpected: 2 \n\tActual: ";
+    if (testIsEmpty()) {
+        test = "True\n\tResult: Passed!";
+    } else {
+        test = "False\n\tResult: Failed.";
+        failedTests.push_back("LinkedListOfInts::isEmpty when list is empty.");
+    }
+    tuple<bool, int> result = testSize();
+    test = to_string(get<1>(result)) + (get<0>(result) ? "\n\tResult: Passed!" : "\n\tResult: Failed.");
+    if (testIsEmpty()) {
+        test = "True\n\tResult: Passed!";
+    } else {
+        test = "False\n\tResult: Failed.";
+        failedTests.push_back("LinkedListOfInts::isEmpty when list is empty.");
+    }
+    cout << test << endl;
+    cout << "Testing LinkedListOfInts::isEmpty.....\n\tExpected: False \n\tActual: ";
+    if (testIsEmpty()) {
+        test = "True\n\tResult: Passed!";
+    } else {
+        test = "False\n\tResult: Failed.";
+        failedTests.push_back("LinkedListOfInts::isEmpty when list is empty.");
+    }
+    test = testIsEmpty() ? "False\n\tResult: Passed!" : "True\n\tResult: Failed.";
+    if (testIsEmpty()) {
+        test = "True\n\tResult: Passed!";
+    } else {
+        test = "False\n\tResult: Failed.";
+        failedTests.push_back("LinkedListOfInts::isEmpty when list is empty.");
+    }
+    cout << test << endl;
+    cout << "Testing LinkedListOfInts::addBack.....\n\tResult: ";
+    if (testIsEmpty()) {
+        test = "True\n\tResult: Passed!";
+    } else {
+        test = "False\n\tResult: Failed.";
+        failedTests.push_back("LinkedListOfInts::isEmpty when list is empty.");
+    }
+    test = testAddBack(1) && testAddBack(2) ? "Passed!" : "Failed.";
+    cout << test << endl;
+
 }

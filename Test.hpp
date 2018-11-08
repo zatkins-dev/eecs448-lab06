@@ -14,15 +14,16 @@
 #include "Node.h"
 #include <vector>
 #include <tuple>
+#include <string>
 
 using namespace std;
 class Test
-{   
+{
     public:
-    Test(LinkedListOfInts testList);
+    Test();
     ~Test();
     void runTests();
-    
+
     private:
     bool testIsEmpty() const;
     tuple<bool, int> testSize() const;
@@ -30,7 +31,7 @@ class Test
     bool testToVector(vector<int> expected) const;
     bool testAddBack(int value);
     bool testAddFront(int value);
-    bool testRemoveBack();	
+    bool testRemoveBack();
     bool testRemoveFront();
     LinkedListOfInts* list;
 
