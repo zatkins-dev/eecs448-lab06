@@ -285,6 +285,7 @@ void Test::runTests()
     else {
         testResults << "~~~~~~~~~~~~~~~~~~~~\n" << "| ALL TESTS PASSED |\n" << "~~~~~~~~~~~~~~~~~~~~\n";
     }
+    testResults.close();
 }
 
 string Test::displayList() {
