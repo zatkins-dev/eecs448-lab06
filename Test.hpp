@@ -15,12 +15,23 @@
 #include <vector>
 #include <string>
 #include <sstream>
+#include <fstream>
 
 using namespace std;
 class Test
 {
     public:
+    /**
+     *  Constructs a new Test instance
+     *  @pre None
+     *  @post test LinkedListOfInts list is initialized
+     */
     Test();
+    /**
+     *  Destructor
+     *  @pre None
+     *  @post test LinkedListOfInts list is deleted
+     */
     ~Test();
     /**
      * Runs all tests and outputs results to console
@@ -30,6 +41,13 @@ class Test
     void runTests();
 
     private:
+    /**
+     * @pre None
+     * @post If new bug, added to failedTests
+     * @param context [in] name of function for which bug was found
+     * @param bug [in] string descriping bug found
+     */
+    void reportBug(string context, string bug);
     /**
      * @pre None
      * @post If bug is found, adds string to failedTests
@@ -79,14 +97,14 @@ class Test
      * @pre None
      * @post None
      * @returns Output string of this->list
-     * * format of output for k elem list is "[list[0],list[1],...,list[k]]" 
+     * * format of output for k elem list is "[list[0],list[1],...,list[k]]"
      */
     string displayList();
     /**
      * @pre None
      * @post None
      * @returns Output string of this->list
-     * * format of output for k elem vector is "[vect[0],vect[1],...,vect[k]]" 
+     * * format of output for k elem vector is "[vect[0],vect[1],...,vect[k]]"
      */
     string displayVector(vector<int> vect);
     /**

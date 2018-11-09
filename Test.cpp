@@ -16,6 +16,14 @@ Test::~Test()
     delete list;
 }
 
+void Test::reportBug(string context, string bug){
+    string bugString = context + " " + bug;
+    for (string b: failedTests) {
+        if (b == bugString) return;
+    }
+    failedTests.push_back(bugString);
+}
+
 string Test::testIsEmpty()
 {
     stringstream output;
@@ -36,9 +44,9 @@ string Test::testIsEmpty()
     } else {
         output << "\tResult: Failed." << endl;
         if (testAgainst.size() > 0) {
-            failedTests.push_back("LinkedListOfInts::isEmpty returns true when list is not empty.");
+            reportBug("LinkedListOfInts::isEmpty","returns true when list is not empty.");
         } else {
-            failedTests.push_back("LinkedListOfInts::isEmpty returns false when list is empty.");
+            reportBug("LinkedListOfInts::isEmpty","returns false when list is empty.");
         }
     }
     return output.str();
@@ -60,7 +68,7 @@ string Test::testSize()
         output << "\tResult: Passed!" << endl;
     } else {
         output << "\tResult: Failed." << endl;
-        failedTests.push_back("LinkedListOfInts::size returns incorrect value.");
+        reportBug("LinkedListOfInts::size","returns incorrect value.");
     }
     return output.str();
 }
@@ -84,9 +92,9 @@ string Test::testSearch(int value)
     } else {
         output << "\tResult: Failed." << endl;
         if (actual == "True") {
-            failedTests.push_back("LinkedListOfInts::search returns false for element in list.");
+            reportBug("LinkedListOfInts::search","returns false for element in list.");
         } else {
-            failedTests.push_back("LinkedListOfInts::search returns true for element not in list.");
+            reportBug("LinkedListOfInts::search","returns true for element not in list.");
         }
     }
     return output.str();
@@ -109,7 +117,7 @@ string Test::testAddBack(int value)
         output << "\tResult: Passed!" << endl;
     } else {
         output <<  "\tResult: Failed." << endl;
-        failedTests.push_back("LinkedListOfInts::addBack does not add to the back.");
+        reportBug("LinkedListOfInts::addBack","does not add to the back.");
     }
     int size = testAgainst.size();
     testAgainst = list -> toVector();
@@ -119,7 +127,7 @@ string Test::testAddBack(int value)
      * ? False: Test failed, add bug string to failedTest
      */
     if (size != testAgainst.size()) {
-        failedTests.push_back("LinkedListOfInts::addBack fails to add.");
+        reportBug("LinkedListOfInts::addBack","fails to add.");
     }
     return output.str();
 }
@@ -136,12 +144,12 @@ string Test::testAddFront(int value)
         output << "\tResult: Passed!" << endl;
     } else {
         output <<  "\tResult: Failed." << endl;
-        failedTests.push_back("LinkedListOfInts::addFront does not add to the front.");
+        reportBug("LinkedListOfInts::addFront","does not add to the front.");
     }
     int size = testAgainst.size();
     testAgainst = list -> toVector();
     if (size != testAgainst.size()) {
-        failedTests.push_back("LinkedListOfInts::addFront fails to add.");
+        reportBug("LinkedListOfInts::addFront","fails to add.");
     }
     return output.str();
 }
@@ -162,7 +170,7 @@ string Test::testRemoveBack()
             output << "\tResult: Passed!\n";
         } else {
             output << "\tResult: Failed.\n";
-            failedTests.push_back("LinkedListOfInts::removeBack returns false when list is not empty.");
+            reportBug("LinkedListOfInts::removeBack","returns false when list is not empty.");
         }
         output << "Testing if LinkedListOfInts::removeBack removed an element...\n\tResult: ";
         testAgainst = list->toVector();
@@ -170,7 +178,7 @@ string Test::testRemoveBack()
             output << "Passed!\n";
         } else {
             output << "Failed\n";
-            failedTests.push_back("LinkedListOfInts::removeBack fails to remove.");
+            reportBug("LinkedListOfInts::removeBack","fails to remove.");
         }
     }
     else {
@@ -182,7 +190,7 @@ string Test::testRemoveBack()
             output << "\tResult: Passed!" << endl;
         } else {
             output << "\tResult: Failed." << endl;
-            failedTests.push_back("LinkedListOfInts::removeBack returns true when list is empty.");
+            reportBug("LinkedListOfInts::removeBack","returns true when list is empty.");
         }
     }
     return output.str();
@@ -205,7 +213,7 @@ string Test::testRemoveFront()
             output << "\tResult: Passed!\n";
         } else {
             output << "\tResult: Failed.\n";
-            failedTests.push_back("LinkedListOfInts::removeFront returns false when list is not empty.");
+            reportBug("LinkedListOfInts::removeFront","returns false when list is not empty.");
         }
         output << "Testing if LinkedListOfInts::removeFront removed an element...\n\tResult: ";
         testAgainst = list->toVector();
@@ -213,7 +221,7 @@ string Test::testRemoveFront()
             output << "Passed!\n";
         } else {
             output << "Failed\n";
-            failedTests.push_back("LinkedListOfInts::removeFront fails to remove.");
+            reportBug("LinkedListOfInts::removeFront","fails to remove.");
         }
     }
     else {
@@ -225,7 +233,7 @@ string Test::testRemoveFront()
             output << "\tResult: Passed!" << endl;
         } else {
             output << "\tResult: Failed." << endl;
-            failedTests.push_back("LinkedListOfInts::removeFront returns true when list is empty.");
+            reportBug("LinkedListOfInts::removeFront","returns true when list is empty.");
         }
     }
     return output.str();
@@ -237,7 +245,7 @@ void Test::runTests()
     cout << "Testing LinkedListOfInts::isEmpty when empty\n-------------------------------------------\n";
     cout << testIsEmpty() << endl;
     cout << "Testing LinkedListOfInts::size when empty\n-----------------------------------------\n";
-    cout << testSize() << endl;~~~~~~~~~~~~~~~~~~~~
+    cout << testSize() << endl;
 
     cout << "Testing LinkedListOfInts::removeBack when empty\n------------------------------------------\n";
     cout << testRemoveBack() << endl;
@@ -272,7 +280,7 @@ void Test::runTests()
 
     // open a file stream and write bug results
     ofstream testResults;
-    testResults.open("bugtest.txt");
+    testResults.open("BugTestResults.txt");
     if (failedTests.size()>0) {
         cout << "~~~~~~~~~~~~~~~~\n" << "| FAILED TESTS |\n" << "~~~~~~~~~~~~~~~~\n";
         testResults << "~~~~~~~~~~~~~~~~\n" << "| FAILED TESTS |\n" << "~~~~~~~~~~~~~~~~\n";

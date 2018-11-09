@@ -1,0 +1,9 @@
+~~~~~~~~~~~~~~~~
+| FAILED TESTS |
+~~~~~~~~~~~~~~~~
+1. LinkedListOfInts::isEmpty returns true when list is not empty.
+2. LinkedListOfInts::addBack does not add to the back.
+3. LinkedListOfInts::removeBack returns false when list is not empty.
+4. LinkedListOfInts::removeBack fails to remove.
+5. LinkedListOfInts::removeFront returns false when list is not empty.
+6. LinkedListOfInts::removeFront fails to remove.
