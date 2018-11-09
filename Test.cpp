@@ -1,3 +1,9 @@
+/**
+*	@file Test.cpp
+*	@author Zachary Atkins
+*	@date 11/2/2018
+*	@brief Implementation file for Test class
+*/
 #include "Test.hpp"
 
 Test::Test()
