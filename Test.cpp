@@ -79,8 +79,16 @@ string Test::testSearch(int value)
     output << "\tExpected: " << expected << endl;
     string actual = list->search(value) ? "True" : "False";
     output << "\tActual: " << actual << endl;
-    string result = expected == actual ? "Passed!" : "Failed.";
-    output << "\tResult: " << result << endl;
+    if (expected == actual) {
+        output << "\tResult: Passed!" << endl;
+    } else {
+        output << "\tResult: Failed." << endl;
+        if (actual == "True") {
+            failedTests.push_back("LinkedListOfInts::search returns false for element in list.");
+        } else {
+            failedTests.push_back("LinkedListOfInts::search returns true for element not in list.");
+        }
+    }
     return output.str();
 }
 
@@ -93,7 +101,7 @@ string Test::testAddBack(int value)
     list->addBack(value);
     output << "\tActual: " << displayList() << endl;
     /**
-     * ? If: vector and list 
+     * ? If: vector and list
      * ? True: Test was passed
      * ? False: Test failed, add bug string to failedTest
      */
@@ -229,7 +237,7 @@ void Test::runTests()
     cout << "Testing LinkedListOfInts::isEmpty when empty\n-------------------------------------------\n";
     cout << testIsEmpty() << endl;
     cout << "Testing LinkedListOfInts::size when empty\n-----------------------------------------\n";
-    cout << testSize() << endl;
+    cout << testSize() << endl;~~~~~~~~~~~~~~~~~~~~
 
     cout << "Testing LinkedListOfInts::removeBack when empty\n------------------------------------------\n";
     cout << testRemoveBack() << endl;
@@ -262,12 +270,20 @@ void Test::runTests()
     cout << "Testing LinkedListOfInts::removeFront when nonempty\n---------------------------------------------------\n";
     cout << testRemoveFront();
 
+    // open a file stream and write bug results
+    ofstream testResults;
+    testResults.open("bugtest.txt");
     if (failedTests.size()>0) {
         cout << "~~~~~~~~~~~~~~~~\n" << "| FAILED TESTS |\n" << "~~~~~~~~~~~~~~~~\n";
+        testResults << "~~~~~~~~~~~~~~~~\n" << "| FAILED TESTS |\n" << "~~~~~~~~~~~~~~~~\n";
         int size = failedTests.size();
         for (int i = 0; i < size; i++) {
             cout << i+1 << ". " << failedTests[i] << endl;
+            testResults << i+1 << ". " << failedTests[i] << endl;
         }
+    }
+    else {
+        testResults << "~~~~~~~~~~~~~~~~~~~~\n" << "| ALL TESTS PASSED |\n" << "~~~~~~~~~~~~~~~~~~~~\n";
     }
 }
 
