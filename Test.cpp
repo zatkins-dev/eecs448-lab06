@@ -20,10 +20,17 @@ string Test::testIsEmpty()
 {
     stringstream output;
     vector<int> testAgainst = list->toVector();
+    // Check if vector is empty
     string expected = testAgainst.size() == 0 ? "True" : "False";
     output << "\tExpected: " << expected << endl;
+    // Check is isEmpty returns true
     string actual = list->isEmpty() ? "True" : "False";
     output << "\tActual: " << actual << endl;
+    /**
+     * ? If: vector and list agree on whether list is empty
+     * ? True: Test was passed
+     * ? False: Test failed, add bug string to failedTest
+     */
     if (expected == actual) {
         output << "\tResult: Passed!" << endl;
     } else {
@@ -44,6 +51,11 @@ string Test::testSize()
     vector<int> testAgainst = list->toVector();
     output << "\tExpected: " << testAgainst.size() << endl;
     output << "\tActual: " << list->size() << endl;
+    /**
+     * ? If: vector and list agree on list size
+     * ? True: Test was passed
+     * ? False: Test failed, add bug string to failedTest
+     */
     if (testAgainst.size() == list->size()) {
         output << "\tResult: Passed!" << endl;
     } else {
@@ -80,6 +92,11 @@ string Test::testAddBack(int value)
     output << "\tExpected: " << displayVector(testAgainst) << endl;
     list->addBack(value);
     output << "\tActual: " << displayList() << endl;
+    /**
+     * ? If: vector and list 
+     * ? True: Test was passed
+     * ? False: Test failed, add bug string to failedTest
+     */
     if (testAgainst == list -> toVector()) {
         output << "\tResult: Passed!" << endl;
     } else {
@@ -88,6 +105,11 @@ string Test::testAddBack(int value)
     }
     int size = testAgainst.size();
     testAgainst = list -> toVector();
+    /**
+     * ? If: vector and list agree on whether list is empty
+     * ? True: Test was passed
+     * ? False: Test failed, add bug string to failedTest
+     */
     if (size != testAgainst.size()) {
         failedTests.push_back("LinkedListOfInts::addBack fails to add.");
     }
